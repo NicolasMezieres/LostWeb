@@ -25,4 +25,4 @@ jobs:
         run: npx ng build
 
       - name: Run test
-        run: npx ng test
+        run: npm run test
