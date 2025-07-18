@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Kay+Pho+Du:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-white: #f5f5f5;
+  --color-black: #212121;
+  --font-kay: "Kay Pho Du", serif;
+  --font-agdasima: "Agdasima", sans-serif;
+}
+.bgGradient {
+  background: linear-gradient(0deg, #1d2671, #702f6b, #c33764);
+}
