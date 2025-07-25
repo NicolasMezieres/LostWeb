@@ -1,0 +1,69 @@
+<div class="bg-black">
+  <div class="flex flex-col min-h-screen py-5 relative z-10">
+    <header class="flex justify-center">
+      <img alt="logo LOST" src="/assets/images/logo.webp" class="h-[60px]" />
+    </header>
+    <main
+      class="flex font-agdasima flex-col justify-center items-center gap-5 flex-auto mx-auto"
+    >
+      <h1 class="font-kay text-2xl">Sign In</h1>
+      <form
+        [formGroup]="signinForm"
+        class="flex flex-col items-center rounded-xl bg-white90 p-5 gap-10"
+      >
+        <div>
+          <mat-form-field subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Identifier</mat-label>
+            <input
+              formControlName="identifier"
+              matInput
+              placeholder="Identifier..."
+              class="md:!text-xl"
+            />
+          </mat-form-field>
+
+          @if (signinForm.controls["identifier"].touched || isSubmit) {
+          <p class="text-red-700">
+            @if(signinForm.controls["identifier"].hasError("required")){
+            <span>This field is required</span>
+            }@else if (signinForm.controls["identifier"].hasError("maxlength"))
+            {
+            <span>Maximum length characters is 320</span>
+            }
+          </p>
+          }
+        </div>
+        <div>
+          <mat-form-field subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              formControlName="password"
+              type="password"
+              matInput
+              placeholder="Password..."
+              class="md:!text-xl"
+            />
+          </mat-form-field>
+
+          @if (signinForm.controls["password"].touched || isSubmit) {
+          <p class="text-red-700">
+            @if(signinForm.controls["password"].hasError("required")){
+            <span>This field is required</span>
+            }@else if (signinForm.controls["password"].hasError("maxlength")) {
+            <span>Maximum length characters is 255</span>
+            }
+          </p>
+          }
+        </div>
+        <button matButton (click)="submitForm($event)">Connexion</button>
+        <button (click)="openDialog($event)">Forget password</button>
+      </form>
+    </main>
+    <app-footer></app-footer>
+  </div>
+  <img
+    alt=""
+    src="/assets/images/bgImage.webp"
+    class="top-0 absolute h-full w-full object-cover blur-[4px]"
+  />
+</div>
