@@ -12,6 +12,8 @@ export class User {
   readonly #url = environment.apiURL + 'user/';
 
   getStatistic(): Observable<statisticType> {
-    return this.#http.get<statisticType>(`${this.#url}statistic`);
+    return this.#http.get<statisticType>(`${this.#url}statistic`, {
+      withCredentials: true,
+    });
   }
 }

@@ -5,6 +5,7 @@ import { User } from '../../services/user/user';
 import { take } from 'rxjs';
 import { Toast } from '../../services/toast/toast';
 import { HttpErrorResponse } from '@angular/common/http';
+import { statisticType } from '../../utils/types';
 
 @Component({
   selector: 'app-statistic',
@@ -13,13 +14,14 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './statistic.css',
 })
 export class Statistic {
-  #toast   = inject(Toast);
+  #toast = inject(Toast);
   #user = inject(User);
-  statistic$ =  this.#user
+  data!: statisticType;
+  statistic$ = this.#user
     .getStatistic()
     .pipe(take(1))
     .subscribe({
-      next: (value) => console.log(value),
+      next: (value) => this.data=value,
       error: (err: HttpErrorResponse) => {
         this.#toast.failToast(err.error.message);
       },

@@ -7,12 +7,26 @@
     >
       <h1 class="font-kay text-xl py-5 md:text-[32px]">Statistic</h1>
       <ul class="flex flex-col gap-5 pb-5">
-        <li>Total announcement : {{ statistic$ }}</li>
-        <li>Total announcement resolved :</li>
-        <li>Total announcement not resolved :</li>
-        <li>Percentage announcement resolved :</li>
-        <li>Total user account :</li>
-        <li>Total user active :</li>
+        <li>Total announcement : {{ data.numberAnnouncement }}</li>
+        <li>
+          Total announcement resolved : {{ data.numberArchiveAnnouncement }}
+        </li>
+        <li>
+          Total announcement not resolved :
+          {{ data.numberAnnouncement - data.numberArchiveAnnouncement }}
+        </li>
+        <li>
+          Percentage announcement resolved :
+          {{
+            (
+              (100 * data.numberArchiveAnnouncement) /
+              data.numberAnnouncement
+            ).toFixed(2)
+          }}
+          %
+        </li>
+        <li>Total user account : {{ data.numberAccount }}</li>
+        <li>Total user active : {{ data.numberActiveAccount }}</li>
       </ul>
     </article>
     <!-- } -->
