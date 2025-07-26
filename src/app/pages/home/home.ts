@@ -10,12 +10,12 @@ import { RouterLink } from '@angular/router';
   template: `<div class="flex flex-col min-h-screen bgGradient">
     <app-header [index]="1"></app-header>
     <main
-      class="flex-auto flex flex-col justify-center items-center gap-10 md:gap-20 text-center text-white px-5 md:px-10 xl:px-20"
+      class="flex-auto font-agdasima flex flex-col justify-center items-center gap-10 md:gap-20 text-center text-white px-5 md:px-10 xl:px-20"
     >
       <h1 class="font-kay text-xl md:text-[32px]">
         Welcome to the panel Aadministrator
       </h1>
-      <h2 class="font-agdasima text-xl md:text-2xl">
+      <h2 class=" text-xl md:text-2xl">
         Use the menu for navigate to the different page and access to the data
         of the main app
       </h2>
