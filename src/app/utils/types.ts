@@ -11,3 +11,9 @@ export type signinResponse = {
 export type messageResponse = {
   message: string;
 };
+export type statisticType = {
+  numberAccount: number;
+  numberActiveAccount: number;
+  numberAnnouncement: number;
+  numberArchiveAnnouncement: number;
+};
