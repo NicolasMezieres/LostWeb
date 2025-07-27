@@ -1,5 +1,85 @@
 <div class="flex flex-col min-h-screen bgGradient">
   <app-header [index]="2"></app-header>
-  <main class="flex-auto"></main>
+  <main
+    class="flex-auto flex flex-col gap-5 py-5 items-center font-agdasima px-5 md:px-10 xl:p-20"
+  >
+    <h1 class="font-kay text-[32px]">User List</h1>
+    <div class="relative max-w-[335px] w-full bg-white90 rounded-[28px]">
+      <input
+        formControlName="identifier"
+        placeholder="Identifier..."
+        class="md:text-xl w-full px-5 py-3 max-w-2xs outline-0"
+        (input)="onSearchChange($event)"
+        [value]="search()"
+      />
+      <mat-icon class="absolute top-3 right-4">search</mat-icon>
+    </div>
+    <h2 class="text-xl md:text-2xl">user found : {{ totalUser }}</h2>
+    <!-- class="bg-white90 overflow-scroll max-w-screen px-5 flex flex-col justify-start" -->
+    <div class="overflow-auto max-w-screen px-5 md:px-10 xl:px-20">
+      <table class="bg-white border border-black text-center text-nowrap">
+        <thead>
+          <tr>
+            @for (name of columnsName; track $index) {
+            <th class="border border-black px-2">
+              <!-- bg-white90  flex justify-center items-center -->
+              {{ name }}
+            </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of userList; track $index) {
+          <tr>
+            <td class="border border-black p-2">{{ user.username }}</td>
+            <td class="border border-black p-2">{{ user.email }}</td>
+            <td class="border border-black p-2">{{ user.firstName }}</td>
+            <td class="border border-black p-2">{{ user.lastName }}</td>
+            <td class="border border-black p-2">{{ user.isActive }}</td>
+            <td class="border border-black p-2">{{ user.gdpr }}</td>
+            <td class="border border-black p-2">
+              {{ user.createdAt | date : "short" }}
+            </td>
+            <td class="border border-black p-2">
+              {{ user.updatedAt | date : "short" }}
+            </td>
+
+            <td
+              class="border cursor-pointer border-black p-2 bg-green-700 text-white"
+            >
+              See all messages
+            </td>
+            <td
+              class="border cursor-pointer border-black p-2 bg-red-700 text-white"
+            >
+              <button (click)="removeUser(user.id, user.username, false)">
+                Ban
+              </button>
+            </td>
+            <td
+              class="border cursor-pointer border-black p-2 bg-red-700 text-white"
+            >
+              <button (click)="removeUser(user.id, user.username, true)">
+                Remove
+              </button>
+            </td>
+          </tr>
+          }
+          <!--
+            <td class="border border-black px-2">Username</td>
+            <td class="border border-black px-2">
+              nicolas.mezieres73&#64;gmail.com
+            </td>
+            <td class="border border-black px-2 text-center">nico</td>
+            <td class="border border-black px-2 text-center">mezieres</td>
+            <td class="border border-black px-2 text-center">true</td>
+            <td class="border border-black px-2 text-center">true</td>
+            <td class="border border-black px-2 text-center">27/07/2025</td>
+            <td class="border border-black px-2 text-center">27/07/2025</td>
+             -->
+        </tbody>
+      </table>
+    </div>
+  </main>
   <app-footer></app-footer>
 </div>

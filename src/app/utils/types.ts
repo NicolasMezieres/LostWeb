@@ -17,3 +17,19 @@ export type statisticType = {
   numberAnnouncement: number;
   numberArchiveAnnouncement: number;
 };
+export type userType = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  isActive: boolean;
+  email: string;
+  gdpr: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
+export type getUsersResponse = {
+  data: userType[];
+  totalUser: number;
+  isEndList: boolean;
+};
