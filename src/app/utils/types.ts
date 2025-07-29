@@ -19,9 +19,10 @@ export type statisticType = {
 };
 export type userType = {
   id: string;
+  username: string;
   firstName: string;
   lastName: string;
-  username: string;
+
   isActive: boolean;
   email: string;
   gdpr: boolean;

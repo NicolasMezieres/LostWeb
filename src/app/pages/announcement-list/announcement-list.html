@@ -1,5 +1,69 @@
 <div class="flex flex-col min-h-screen bgGradient">
   <app-header [index]="3" />
-  <main class="flex-auto"></main>
+  <main class="flex-auto font-agdasima flex flex-col items-center py-5">
+    <h1 class="font-kay text-[32px]">Announcement list</h1>
+    <button
+      (click)="toogleMenuFilter()"
+      class="bg-white relative flex justify-center py-2.5 {{
+        isVisibleFilter() ? 'rounded-t-xl' : 'rounded-xl delay-[930ms]'
+      }}  w-80 transition-all  ease-out"
+    >
+      Filter
+      <mat-icon class="absolute top-1/4 right-4">keyboard_arrow_down </mat-icon>
+    </button>
+    <form
+      [formGroup]="signinForm"
+      class="{{
+        isVisibleFilter() ? 'max-h-96 rounded-b-xl py-1 ' : 'max-h-0 py-0'
+      }}  bg-white transition-all duration-1000 ease-in-out overflow-hidden  w-80 text-center flex flex-col gap-2 justify-center items-center  "
+    >
+      <mat-form-field subscriptSizing="dynamic" appearance="outline">
+        <mat-label>search</mat-label>
+        <input
+          formControlName="password"
+          matInput
+          placeholder="Identifier..."
+          class="md:!text-xl"
+        />
+      </mat-form-field>
+      <mat-form-field
+        class="w-44 outline-[3px] rounded outline-purple border-purple"
+      >
+        <mat-label>Select an option</mat-label>
+        <mat-select disableRipple class="bg-white">
+          <mat-option value="1" class="!bg-white">Option 1</mat-option>
+          <mat-option value="2" class="!bg-white">Option 2</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="flex gap-2.5">
+        <mat-form-field appearance="outline" class="w-24">
+          <mat-label class="text-xl">date 1</mat-label>
+          <input
+            formControlName="password"
+            type="date"
+            matInput
+            placeholder="Identifier..."
+            class="md:!text-xl"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-24">
+          <mat-label class="text-xl">date 2</mat-label>
+          <input
+            formControlName="password"
+            type="date"
+            matInput
+            class="md:!text-xl"
+          />
+        </mat-form-field>
+      </div>
+      <button
+        (click)="toogleMenuFilter()"
+        class="border border-black p-2 w-52 rounded-xl"
+      >
+        Search
+      </button>
+    </form>
+    <p>On va mettre du texte ici</p>
+  </main>
   <app-footer />
 </div>

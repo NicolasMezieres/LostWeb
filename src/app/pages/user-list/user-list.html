@@ -15,7 +15,14 @@
       <mat-icon class="absolute top-3 right-4">search</mat-icon>
     </div>
     <h2 class="text-xl md:text-2xl">user found : {{ totalUser }}</h2>
-    <!-- class="bg-white90 overflow-scroll max-w-screen px-5 flex flex-col justify-start" -->
+
+    @if(isLoading()){
+    <mat-progress-spinner
+      [mode]="'indeterminate'"
+      [value]="50"
+      class="stroke-[#FFFEFD]"
+    ></mat-progress-spinner>
+    } @else if(userList && userList.length > 0){
     <div class="overflow-auto max-w-screen px-5 md:px-10 xl:px-20">
       <table class="bg-white border border-black text-center text-nowrap">
         <thead>
@@ -65,21 +72,21 @@
             </td>
           </tr>
           }
-          <!--
-            <td class="border border-black px-2">Username</td>
-            <td class="border border-black px-2">
-              nicolas.mezieres73&#64;gmail.com
-            </td>
-            <td class="border border-black px-2 text-center">nico</td>
-            <td class="border border-black px-2 text-center">mezieres</td>
-            <td class="border border-black px-2 text-center">true</td>
-            <td class="border border-black px-2 text-center">true</td>
-            <td class="border border-black px-2 text-center">27/07/2025</td>
-            <td class="border border-black px-2 text-center">27/07/2025</td>
-             -->
         </tbody>
       </table>
     </div>
+    <div class="text-white flex">
+      @if(page() > 1){<button (click)="page.set(page() - 1)">
+        <mat-icon>arrow_left</mat-icon></button
+      >}
+      <p class="px-6">{{ page() }}</p>
+      @if(!isEndList){<button (click)="page.set(page() + 1)">
+        <mat-icon>arrow_right</mat-icon></button
+      >}
+    </div>
+    }@else {
+    <h3 class="text-xl">Nobody user found !</h3>
+    }
   </main>
   <app-footer></app-footer>
 </div>

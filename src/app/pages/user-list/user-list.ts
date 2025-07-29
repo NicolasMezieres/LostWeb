@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { MatIcon } from '@angular/material/icon';
@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { RemoveUserModal } from '../../components/modal/remove-user/remove-user';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-user-list',
-  imports: [Header, Footer, MatIcon, DatePipe],
+  imports: [Header, Footer, MatIcon, DatePipe, MatProgressSpinnerModule],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })
@@ -32,9 +33,9 @@ export class UserList {
     'GDPR',
     'Date of Creation',
     'Last activity',
-    // 'Messages',
-    // 'Ban',
-    // 'Remove',
+    'Messages',
+    'Ban',
+    'Remove',
   ];
 
   userList: userType[] = [];
@@ -44,9 +45,9 @@ export class UserList {
   page = signal<number>(1);
   search = signal<string>('');
   user$ = effect(() => {
-    const search = this.search();
-    const page = this.page();
-    const isLoading = this.isLoading();
+    this.search();
+    this.page();
+    this.isLoading.set(true);
     const delay = setTimeout(() => {
       this.requestUserList();
       this.isLoading.set(false);
