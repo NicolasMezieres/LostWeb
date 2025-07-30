@@ -1,69 +1,97 @@
 <div class="flex flex-col min-h-screen bgGradient">
   <app-header [index]="3" />
-  <main class="flex-auto font-agdasima flex flex-col items-center py-5">
+  <main class="flex-auto font-agdasima flex flex-col gap-5 items-center py-5">
     <h1 class="font-kay text-[32px]">Announcement list</h1>
-    <button
-      (click)="toogleMenuFilter()"
-      class="bg-white relative flex justify-center py-2.5 {{
-        isVisibleFilter() ? 'rounded-t-xl' : 'rounded-xl delay-[930ms]'
-      }}  w-80 transition-all  ease-out"
-    >
-      Filter
-      <mat-icon class="absolute top-1/4 right-4">keyboard_arrow_down </mat-icon>
-    </button>
-    <form
-      [formGroup]="signinForm"
-      class="{{
-        isVisibleFilter() ? 'max-h-96 rounded-b-xl py-1 ' : 'max-h-0 py-0'
-      }}  bg-white transition-all duration-1000 ease-in-out overflow-hidden  w-80 text-center flex flex-col gap-2 justify-center items-center  "
-    >
-      <mat-form-field subscriptSizing="dynamic" appearance="outline">
-        <mat-label>search</mat-label>
-        <input
-          formControlName="password"
-          matInput
-          placeholder="Identifier..."
-          class="md:!text-xl"
-        />
-      </mat-form-field>
-      <mat-form-field
-        class="w-44 outline-[3px] rounded outline-purple border-purple"
+    <div>
+      <button
+        (click)="toogleMenuFilter()"
+        class="bg-white relative flex justify-center py-2.5 {{
+          isVisibleFilter() ? 'rounded-t-xl' : 'rounded-xl delay-[930ms]'
+        }}  w-80 transition-all  ease-out"
       >
-        <mat-label>Select an option</mat-label>
-        <mat-select disableRipple class="bg-white">
-          <mat-option value="1" class="!bg-white">Option 1</mat-option>
-          <mat-option value="2" class="!bg-white">Option 2</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="flex gap-2.5">
-        <mat-form-field appearance="outline" class="w-24">
-          <mat-label class="text-xl">date 1</mat-label>
+        Filter
+        <mat-icon class="absolute top-1/4 right-4"
+          >keyboard_arrow_down
+        </mat-icon>
+      </button>
+      <form
+        [formGroup]="announcementSearchForm"
+        class="{{
+          isVisibleFilter() ? 'max-h-96 rounded-b-xl pb-3 ' : 'max-h-0 pb-0'
+        }}  bg-white transition-all duration-1000 ease-in-out overflow-hidden  w-80 text-center flex flex-col gap-2 justify-center items-center  "
+      >
+        <mat-form-field subscriptSizing="dynamic" appearance="outline">
+          <mat-label>search</mat-label>
           <input
-            formControlName="password"
-            type="date"
+            formControlName="search"
             matInput
             placeholder="Identifier..."
             class="md:!text-xl"
           />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="w-24">
-          <mat-label class="text-xl">date 2</mat-label>
-          <input
-            formControlName="password"
-            type="date"
-            matInput
-            class="md:!text-xl"
-          />
+        <mat-form-field
+          class="w-44 outline-[3px] rounded outline-purple border-purple"
+        >
+          <mat-label>Select an option</mat-label>
+          <mat-select disableRipple class="bg-white" formControlName="isLost">
+            <mat-option [value]="false" class="!bg-white">Found</mat-option>
+            <mat-option [value]="true" class="!bg-white">Lost</mat-option>
+          </mat-select>
         </mat-form-field>
-      </div>
-      <button
-        (click)="toogleMenuFilter()"
-        class="border border-black p-2 w-52 rounded-xl"
-      >
-        Search
-      </button>
-    </form>
-    <p>On va mettre du texte ici</p>
+        <div class="flex gap-2.5">
+          <mat-form-field appearance="outline" class="w-[100px]">
+            <mat-label class="text-xl">From</mat-label>
+            <input
+              formControlName="fromDate"
+              type="date"
+              matInput
+              class="md:!text-xl"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-[100px]">
+            <mat-label class="text-xl">To</mat-label>
+            <input
+              formControlName="toDate"
+              type="date"
+              matInput
+              class="md:!text-xl"
+            />
+          </mat-form-field>
+        </div>
+        <button
+          (click)="toogleMenuFilter(); searchAnnouncement()"
+          class="border border-black p-2 w-52 rounded-xl"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+    @if ( data().length > 1 ) {
+    <h2 class="text-xl">Announcement found : {{ totalAnnouncement() }}</h2>
+    <article
+      class="flex flex-col gap-5 md:grid md:grid-cols-2 md:gap-10 xl:grid-cols-3"
+    >
+      @for(element of data(); track $index){
+      <app-announcement-card
+        [announcementId]="element.id"
+        [name]="element.name"
+        [date]="element.dateLostOrFound"
+        [username]="element.user.username"
+        [picture]="element.picture ? element.picture : undefined"
+      />}
+    </article>
+    <div class="text-white flex">
+      @if(page() > 1){<button (click)="page.set(page() - 1)">
+        <mat-icon>arrow_left</mat-icon></button
+      >}
+      <p class="px-6">{{ page() }}</p>
+      @if(!isEndList()){<button (click)="page.set(page() + 1)">
+        <mat-icon>arrow_right</mat-icon></button
+      >}
+    </div>
+    }@else {
+    <h2 class="text-xl">Nobody announcement found !</h2>
+    }
   </main>
   <app-footer />
 </div>

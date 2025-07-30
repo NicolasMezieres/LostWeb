@@ -6,7 +6,34 @@ import { Menu } from '../modal/menu/menu';
 @Component({
   selector: 'app-header',
   imports: [MatIconModule, RouterLink],
-  templateUrl: './header.html',
+  template: `
+    <header
+      class="p-5 flex justify-between items-center border-b border-black md:px-10 xl:px-20"
+    >
+      <img src="/assets/images/logo.webp" class="h-12" />
+      <button (click)="openMenu()">
+        <mat-icon
+          inline="true"
+          class="!text-[40px] xl:!hidden"
+          aria-hidden="false"
+          aria-label="menu icon"
+          fontIcon="menu"
+        />
+      </button>
+      <ul class="gap-24 hidden xl:flex text-xl">
+        @for(element of arrayElementNav; track $index){
+        <a
+          [routerLink]="['/' + element.toLowerCase()]"
+          [className]="$index + 1 == index() ? 'underline' : ''"
+          >{{ element.replaceAll('_', ' ') }}</a
+        >
+        }
+      </ul>
+      <button class="hidden xl:block text-xl" (click)="logout($event)">
+        Logout
+      </button>
+    </header>
+  `,
 })
 export class Header {
   index = input.required();

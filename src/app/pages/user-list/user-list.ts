@@ -44,7 +44,7 @@ export class UserList {
   isLoading = signal<boolean>(true);
   page = signal<number>(1);
   search = signal<string>('');
-  user$ = effect(() => {
+  userEffect = effect(() => {
     this.search();
     this.page();
     this.isLoading.set(true);

@@ -7,7 +7,22 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'dialog-overview-example-dialog',
-  templateUrl: './forget-password.html',
+  template: `
+    <div class="p-5 font-agdasima">
+      <h1 class="text-xl text-center mb-10">Enter your email</h1>
+      <form class="flex flex-col justify-center items-center gap-10">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="example@example.com"
+            class="md:text-xl"
+          />
+        </mat-form-field>
+        <button matButton>Connexion</button>
+      </form>
+    </div>
+  `,
   imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
 })
 export class ForgetPasswordModal {
