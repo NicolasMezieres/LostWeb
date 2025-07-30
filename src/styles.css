@@ -8,6 +8,9 @@
   --font-kay: "Kay Pho Du", serif;
   --font-agdasima: "Agdasima", sans-serif;
 }
+* {
+  scrollbar-width: thin;
+}
 .bgGradient {
   background: linear-gradient(0deg, #1d2671, #702f6b, #c33764);
 }
@@ -46,4 +49,8 @@ mat-form-field div {
 }
 .successToast {
   background-color: #558555;
+}
+.failToast {
+  background-color: red;
+  color: whitesmoke;
 }

@@ -1,0 +1,11 @@
+<div class="p-5 font-agdasima flex flex-col items-center bg-white">
+  <h1 class="text-xl text-center mb-10">
+    Are you sure to {{ data.isRemove ? "remove" : "ban" }} {{ data.username }} ?
+  </h1>
+  <button
+    (click)="data.isRemove ? removeUser() : banUser()"
+    class="bg-red-700 text-white p-2.5 rounded-md"
+  >
+    {{ data.isRemove ? "Remove" : "Ban" }}
+  </button>
+</div>
