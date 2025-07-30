@@ -19,9 +19,10 @@ export type statisticType = {
 };
 export type userType = {
   id: string;
+  username: string;
   firstName: string;
   lastName: string;
-  username: string;
+
   isActive: boolean;
   email: string;
   gdpr: boolean;
@@ -32,4 +33,29 @@ export type getUsersResponse = {
   data: userType[];
   totalUser: number;
   isEndList: boolean;
+};
+export type announcementSearchResponse = {
+  data: announcementType[];
+  total: number;
+  isEndList: boolean;
+};
+export type announcementSearchType = {
+  search: string;
+  isLost: boolean | null;
+  fromDate: string;
+  toDate: string;
+  page: number;
+};
+export type categoryType = {
+  id: number;
+  name: string;
+};
+export type announcementType = {
+  id: string;
+  name: string;
+  picture: string | null;
+  dateLostOrFound: string;
+  user: {
+    username: string;
+  };
 };
