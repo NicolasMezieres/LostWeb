@@ -36,7 +36,7 @@ import { Menu } from '../modal/menu/menu';
   `,
 })
 export class Header {
-  index = input.required();
+  index = input();
   #router = inject(Router);
   readonly arrayElementNav = [
     'Home',

@@ -1,10 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Kay+Pho+Du:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
-@use "@angular/material" as mat;
-@include mat.core();
-:root {
-  --mdc-circular-progress-active-indicator-color: orange;
-}
+
 @theme {
   --color-white: #f5f5f5;
   --color-black: #212121;

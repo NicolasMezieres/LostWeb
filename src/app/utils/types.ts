@@ -59,3 +59,21 @@ export type announcementType = {
     username: string;
   };
 };
+export type announcementByIdType = {
+  name: string;
+  picture: string | null;
+  category: {
+    name: string;
+  };
+  description: string;
+  latitude: number;
+  longitude: number;
+  dateLostOrFound: string;
+  user: {
+    username: string;
+  };
+  isArchive: boolean;
+};
+export type announcementByIdResponse = {
+  data: announcementByIdType;
+};
