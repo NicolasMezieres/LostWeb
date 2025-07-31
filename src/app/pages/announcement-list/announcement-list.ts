@@ -14,10 +14,12 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { AnnouncementCard } from '../../components/card/announcement-card/announcement-card';
-import { Announcement } from '../../services/announcement/announcement';
+import { AnnouncementApi } from '../../services/announcement/announcement';
 import { Toast } from '../../services/toast/toast';
-import { announcementSearchType, announcementType } from '../../utils/types';
+import { announcementType } from '../../utils/types';
 import { take } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-announcement-list',
   imports: [
@@ -34,8 +36,9 @@ import { take } from 'rxjs';
   templateUrl: './announcement-list.html',
 })
 export class AnnouncementList {
-  #announcement = inject(Announcement);
+  #announcement = inject(AnnouncementApi);
   #toast = inject(Toast);
+  #router = inject(Router);
   data = model<announcementType[]>([]);
   page = model<number>(1);
   totalAnnouncement = model<number>(0);
@@ -57,10 +60,14 @@ export class AnnouncementList {
       .pipe(take(1))
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.data.set(res.data);
           this.isEndList.set(res.isEndList);
           this.totalAnnouncement.set(res.total);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.#toast.failToast(err.error.message);
+          //function logout
+          this.#router.navigate(['/signin']);
         },
       });
   }
