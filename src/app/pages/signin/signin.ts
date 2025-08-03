@@ -63,7 +63,6 @@ export class Signin {
         .pipe(take(1))
         .subscribe({
           next: (value) => {
-            console.log(value);
             if (value.role === 'Admin') {
               this.#toast.successToast(value.message);
               this.#router.navigate(['home']);
@@ -72,7 +71,6 @@ export class Signin {
             }
           },
           error: (err: HttpErrorResponse) => {
-            console.log(err);
             this.#toast.failToast(
               Array.isArray(err.error.message)
                 ? err.error.message[0]
